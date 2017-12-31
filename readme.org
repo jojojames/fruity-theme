@@ -11,5 +11,4 @@
   #+end_src
 * Screenshots
   [[./screenshots/c.png]]
-  [[./screenshots/cplusplus.png]]
-  [[./screenshots/erlang.png]]
+  [[./screenshots/objc.png]]
