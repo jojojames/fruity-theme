@@ -1,0 +1,15 @@
+#+TITLE: Fruity Theme
+
+* About
+  A port of Vim's Fruity Theme.
+
+* Installation
+  Install manually by git cloning and then adding to ~custom-theme-load-path~.
+
+  #+begin_src emacs-lisp :tangle yes
+  (load-theme 'fruity t)
+  #+end_src
+* Screenshots
+  [[./screenshots/c.png]]
+  [[./screenshots/cplusplus.png]]
+  [[./screenshots/erlang.png]]
