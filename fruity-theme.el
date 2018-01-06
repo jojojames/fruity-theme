@@ -200,6 +200,7 @@
    `(term-color-magenta ((t (:foreground "magenta" :background "magenta"))))
    `(term-color-cyan ((t (:foreground "cyan" :background "cyan"))))
    `(term-color-white ((t (:foreground "white" :background "white"))))
+   `(term ((t (:foreground ,--normal-fg-- :background ,--normal-bg--))))
 
    ;; `whitespace-mode'
    ;; (whitespace-empty :foreground base7 :background cyan)
