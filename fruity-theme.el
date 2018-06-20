@@ -149,27 +149,16 @@
    ;; (header-line :foreground base5 :background base2)
    ;; (menu :background base3 :foreground base6)
 
-   ;; `(mode-line
-   ;;   ((t (
-   ;;        :foreground "#00243B"
-   ;;        :background "#C1CFDE"
-   ;;        :box (:color "#C1CFDE" :line-width 5)))))
-   ;; `(mode-line-inactive
-   ;;   ((t (
-   ;;        :foreground "#506070"
-   ;;        :background "#DFE9F2"
-   ;;        :box (:color "#DFE9F2" :line-width 5)))))
-
    `(mode-line
      ((t (
-          :foreground ,--subtle-1--
-          :background ,--subtle-3--
-          :box (:color ,--subtle-3-- :line-width 5)))))
+          :foreground "#00243B"
+          :background "#C1CFDE"
+          :box (:color "#C1CFDE" :line-width 5)))))
    `(mode-line-inactive
      ((t (
-          :foreground ,--subtle-2--
-          :background ,--subtle-3--
-          :box (:color ,--subtle-3-- :line-width 5)))))
+          :foreground "#506070"
+          :background "#DFE9F2"
+          :box (:color "#DFE9F2" :line-width 5)))))
 
    ;; ;; compilation
    ;; (compilation-mode-line-fail :foreground unspecified :inherit compilation-error)
