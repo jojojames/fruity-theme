@@ -34,14 +34,14 @@
 
 (deftheme fruity "Port of fruity theme")
 
-(let ((--normal-fg-- "#ffffff")
-      (--normal-bg-- "#001217")
-      (--nontext-fg-- "#444444")
-      (--nontext-bg-- "#000000")
-      (--cursor-- "#aaaaaa")
-      (--lcursor-- "#aaaaaa")
-      (--visual-- "#004254")
-      (--cursor-line-- "#011C24")
+(let ((normal-fg "#ffffff")
+      (normal-bg "#001217")
+      (nontext-fg "#444444")
+      (nontext-bg "#000000")
+      (cursor "#aaaaaa")
+      (lcursor "#aaaaaa")
+      (visual "#004254")
+      (cursor-line "#011C24")
 
       ;; hi ColorColumn  guibg=#011c25
       ;; hi LineNr       guifg=#aaaaaa   guibg=#00252e
@@ -52,38 +52,38 @@
       ;; hi Title        guifg=#ffffff                   gui=bold
 
       ;; Syntax Elements
-      (--string-- "#0086d2")
-      (--constant-- "#007DC4")
-      (--number-- "#0086f7")
-      (--statement-- "#038EC1")
-      (--function-- "#1BB3FF")
-      (--preproc-- "#ff0007")
-      (--variable-- "#e90819")
-      (--reference-- "#e90819")
+      (string "#0086d2")
+      (constant "#007DC4")
+      (number "#0086f7")
+      (statement "#038EC1")
+      (func "#1BB3FF")
+      (preproc "#ff0007")
+      (variable "#e90819")
+      (reference "#e90819")
 
-      (--warning-fg-- "#e50808")
-      (--warning-bg-- "#520000")
+      (warning-fg "#e50808")
+      (warning-bg "#520000")
 
-      (--comment-fg-- "#00d2ff")
-      (--comment-bg-- "#0a1323")
-      (--type-- "#00A8A0")
-      (--error-fg-- "#ffffff")
-      (--error-bg-- "#ab0000")
-      (--identifier-- "#79E33B")
-      (--label-- "#BD55E6")
-      (--operator-- "#8ECFDD")
-      (--negation-- "#fd8900")
+      (comment-fg "#00d2ff")
+      (comment-bg "#0a1323")
+      (type "#00A8A0")
+      (error-fg "#ffffff")
+      (error-bg "#ab0000")
+      (identifier "#79E33B")
+      (label "#BD55E6")
+      (operator "#8ECFDD")
+      (negation "#fd8900")
 
-      (--subtle-1-- "#1BB3FF")
-      (--subtle-2-- "#0086d2")
-      (--subtle-3-- "#0a1323"))
+      (subtle-1 "#1BB3FF")
+      (subtle-2 "#0086d2")
+      (subtle-3 "#0a1323"))
   (custom-theme-set-faces
    'fruity
 
    `(bold ((t (:bold t))))
-   `(button ((t (:foreground ,--subtle-1-- :underline t))))
-   `(default ((t (:background ,--normal-bg-- :foreground ,--normal-fg--))))
-   ;; `(header-line ((t (:background, --mode-line-bg-- :foreground, --normal--)))) ;; info header
+   `(button ((t (:foreground ,subtle-1 :underline t))))
+   `(default ((t (:background ,normal-bg :foreground ,normal-fg))))
+   ;; `(header-line ((t (:background, mode-line-bg :foreground, normal)))) ;; info header
 
    ;; (shadow :foreground base4)
    ;; (link :foreground orange :underline t)
@@ -91,46 +91,46 @@
 
    `(cursor ((t (:background, "#aaaaaa"))))
 
-   ;; `(highlight ((t (:background, --current-line--))))
-   ;; `(highlight-face ((t (:background, --current-line--))))
+   ;; `(highlight ((t (:background, current-line))))
+   ;; `(highlight-face ((t (:background, current-line))))
 
-   `(hl-line ((t (:background ,--cursor-line-- :inverse-video nil))))
+   `(hl-line ((t (:background ,cursor-line :inverse-video nil))))
 
-   ;; `(info-xref ((t (:foreground, --keywords-- :underline t))))
-   `(region ((t (:background, --visual--))))
+   ;; `(info-xref ((t (:foreground, keywords :underline t))))
+   `(region ((t (:background, visual))))
    ;; `(underline ((nil (:underline t))))
 
    ;; (secondary-selection :foreground unspecified :background violet)
    ;; (line-number-current-line :inherit highlight)
-   `(fringe ((t (:foreground ,--normal-fg-- :background ,--normal-bg--))))
-   `(vertical-border ((t (:foreground ,--subtle-2--))))
+   `(fringe ((t (:foreground ,normal-fg :background ,normal-bg))))
+   `(vertical-border ((t (:foreground ,subtle-2))))
 
    `(tooltip ((t (:foreground "#D3E3F2" :background "#324A61"))))
    `(trailing-whitespace ((t (:underline (:style wave :color "white")))))
 
    ;; font-lock
-   `(escape-glyph ((t (:foreground ,--error-fg-- :background ,--error-bg--))))
-   `(font-lock-builtin-face ((t (:foreground ,--operator--))))
+   `(escape-glyph ((t (:foreground ,error-fg :background ,error-bg))))
+   `(font-lock-builtin-face ((t (:foreground ,operator))))
    `(font-lock-comment-delimiter-face
-     ((t (:foreground ,--comment-fg-- :background ,--comment-bg-- :italic t))))
+     ((t (:foreground ,comment-fg :background ,comment-bg :italic t))))
    `(font-lock-comment-face
-     ((t (:foreground ,--comment-fg-- :italic t))))
-   `(font-lock-constant-face ((t (:foreground ,--constant--))))
-   `(font-lock-doc-face ((t (:foreground ,--statement--))))
-   `(font-lock-doc-string-face ((t (:foreground ,--string--))))
-   `(font-lock-function-name-face ((t (:foreground ,--function--))))
-   `(font-lock-keyword-face ((t (:foreground ,--identifier-- :weight bold))))
-   `(font-lock-negation-char-face ((t (:foreground ,--negation--))))
-   `(font-lock-number-face ((t (:foreground ,--number-- :weight bold))))
-   `(font-lock-preprocessor-face ((t (:foreground ,--preproc-- :weight bold))))
-   `(font-lock-reference-face ((t (:foreground ,--reference--))))
-   `(font-lock-regexp-grouping-backslash ((t (:foreground ,--label--))))
-   `(font-lock-regexp-grouping-construct ((t (:foreground ,--label--))))
-   `(font-lock-string-face ((t (:foreground ,--string--))))
-   `(font-lock-type-face ((t (:foreground ,--type--))))
-   `(font-lock-variable-name-face ((t (:foreground ,--variable--))))
+     ((t (:foreground ,comment-fg :italic t))))
+   `(font-lock-constant-face ((t (:foreground ,constant))))
+   `(font-lock-doc-face ((t (:foreground ,statement))))
+   `(font-lock-doc-string-face ((t (:foreground ,string))))
+   `(font-lock-function-name-face ((t (:foreground ,func))))
+   `(font-lock-keyword-face ((t (:foreground ,identifier :weight bold))))
+   `(font-lock-negation-char-face ((t (:foreground ,negation))))
+   `(font-lock-number-face ((t (:foreground ,number :weight bold))))
+   `(font-lock-preprocessor-face ((t (:foreground ,preproc :weight bold))))
+   `(font-lock-reference-face ((t (:foreground ,reference))))
+   `(font-lock-regexp-grouping-backslash ((t (:foreground ,label))))
+   `(font-lock-regexp-grouping-construct ((t (:foreground ,label))))
+   `(font-lock-string-face ((t (:foreground ,string))))
+   `(font-lock-type-face ((t (:foreground ,type))))
+   `(font-lock-variable-name-face ((t (:foreground ,variable))))
    `(font-lock-warning-face
-     ((t (:foreground ,--warning-fg-- :background ,--warning-bg-- :weight bold))))
+     ((t (:foreground ,warning-fg :background ,warning-bg :weight bold))))
 
    `(error
      ((t (:foreground "#EB1515" :background "#3B0000" :weight bold))))
@@ -141,11 +141,11 @@
    `(isearch ((t (:foreground "#161C00" :background "#BEED00" :weight bold))))
    `(match ((t (:foreground "#004357" :background "#B8EFFF" :weight bold))))
    `(isearch-fail
-     ((t (:foreground ,--error-fg-- :background ,--error-bg-- :weight bold))))
+     ((t (:foreground ,error-fg :background ,error-bg :weight bold))))
    ;; (lazy-highlight :foreground base2 :background yellow)
 
    ;; mode and header lines
-   `(minibuffer-prompt ((t (:foreground ,--comment-fg--))))
+   `(minibuffer-prompt ((t (:foreground ,comment-fg))))
    ;; (header-line :foreground base5 :background base2)
    ;; (menu :background base3 :foreground base6)
 
@@ -178,7 +178,7 @@
    `(show-paren-match
      ((t (:foreground "#CEF2D0" :background "#105715" :weight bold))))
    `(show-paren-mismatch
-     ((t (:foreground ,--error-fg-- :background ,--error-bg--))))
+     ((t (:foreground ,error-fg :background ,error-bg))))
 
    ;; ;; term
    `(term-color-black ((t (:foreground "black" :background "black"))))
@@ -189,7 +189,7 @@
    `(term-color-magenta ((t (:foreground "magenta" :background "magenta"))))
    `(term-color-cyan ((t (:foreground "cyan" :background "cyan"))))
    `(term-color-white ((t (:foreground "white" :background "white"))))
-   `(term ((t (:foreground ,--normal-fg-- :background ,--normal-bg--))))
+   `(term ((t (:foreground ,normal-fg :background ,normal-bg))))
 
    ;; `whitespace-mode'
    ;; (whitespace-empty :foreground base7 :background cyan)
@@ -205,15 +205,15 @@
    `(whitespace-trailing ((t (:underline (:style wave :color "white")))))
 
    ;; ;; company
-   `(company-echo-common ((t (:foreground ,--string--))))
+   `(company-echo-common ((t (:foreground ,string))))
    `(company-preview ((t :inherit company-tooltip-selection)) )
    `(company-preview-common ((t (:inherit company-preview))))
    `(company-preview-search ((t (:inherit company-preview))))
-   `(company-scrollbar-bg ((t (:background ,--subtle-1--))))
-   `(company-scrollbar-fg ((t (:background ,--subtle-2--))))
+   `(company-scrollbar-bg ((t (:background ,subtle-1))))
+   `(company-scrollbar-fg ((t (:background ,subtle-2))))
    `(company-tooltip ((t :foreground "#ffffff" :background "#0D4854")))
    `(company-tooltip-annotation ((t (:inherit company-tooltip :foreground "red"))))
-   `(company-tooltip-common ((t (:background ,--subtle-2-- :weight bold))))
+   `(company-tooltip-common ((t (:background ,subtle-2 :weight bold))))
    ;; (company-tooltip-common-selection :foreground base7 :background base4 :weight bold)
    ;; (company-tooltip-mouse :foreground base7 :background base4)
    `(company-tooltip-selection ((t (:foreground "#ffffff" :background "#146E80"))))
@@ -283,8 +283,8 @@
 
    `(flycheck-error-list-highlight
      ((t (
-          :background ,--normal-bg--
-          :underline (:style wave :color ,--error-bg--)))))
+          :background ,normal-bg
+          :underline (:style wave :color ,error-bg)))))
 
    ;; `rainbow-delimiters'
    `(rainbow-delimiters-depth-1-face ((t (:foreground "red" :weight bold))))
