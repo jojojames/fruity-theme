@@ -2,6 +2,7 @@
 
 * About
   A port of Vim's Fruity Theme.
+  https://github.com/mitsuhiko/fruity-vim-colorscheme
 
 * Installation
   Install manually by git cloning and then adding to ~custom-theme-load-path~.
