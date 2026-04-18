@@ -5,8 +5,8 @@
 ;; Author: James Nguyen <james@jojojames.com>
 ;; Maintainer: James Nguyen <james@jojojames.com>
 ;; URL: https://github.com/jojojames/fruity-theme
-;; Version: 0.0.3
-;; Package-Requires: ((emacs "25.1"))
+;; Version: 0.0.5
+;; Package-Requires: ((emacs "29.1"))
 ;; Keywords: emacs, tools, theme
 ;; HomePage: https://github.com/jojojames/fruity-theme
 
@@ -33,14 +33,31 @@
 
 ;;; Code:
 
+(defgroup fruity-theme nil
+  "Fruity theme customizations."
+  :group 'faces
+  :prefix "fruity-")
+
+(defcustom fruity-want-transparent-line-numbers t
+  "If non-nil, `line-number' backgrounds match the buffer background.
+If nil, a distinct darker gutter color is used."
+  :type 'boolean
+  :group 'fruity-theme)
+
+(defcustom fruity-want-dark-modeline t
+  "If non-nil, use the dark modeline palette (blue on dark bg).
+If nil, use the original light modeline (dark text on light bg)
+from fruity-theme v0.0.1."
+  :type 'boolean
+  :group 'fruity-theme)
+
 (deftheme fruity "Port of fruity theme")
 
-(let (;; Base surfaces
+(let* (;; Base surfaces
       (fg           "#ffffff")
       (bg           "#001217")
       (bg-alt       "#0a1323") ; dim accent bg (comment bg)
       (bg-sign      "#002B36") ; sign column
-      (bg-linenum   "#00252e") ; line number gutter
       (bg-cursor    "#001C24") ; cursor line / hl-line
       (bg-column    "#011c25") ; fill-column-indicator
       (bg-visual    "#004254") ; region / selection / tab-line
@@ -51,12 +68,6 @@
       (fg-dim       "#aaaaaa")
       (fg-dimmer    "#444444")
       (fg-dimmest   "#506070")
-
-      ;; Mode line (light over dark — from the vim theme)
-      (modeline-fg     "#00243B")
-      (modeline-bg     "#C1CFDE")
-      (modeline-ifg    "#506070")
-      (modeline-ibg    "#DFE9F2")
 
       ;; Search
       (search-fg     "#161C00")
@@ -112,7 +123,14 @@
 
       ;; Aliases used throughout
       (subtle-1      "#1BB3FF")
-      (subtle-2      "#0086d2"))
+      (subtle-2      "#0086d2")
+
+      ;; Derived from user options
+      (linenum-bg     (if fruity-want-transparent-line-numbers bg "#00252e"))
+      (ml-fg          (if fruity-want-dark-modeline subtle-1 "#00243B"))
+      (ml-bg          (if fruity-want-dark-modeline bg-alt "#C1CFDE"))
+      (ml-inactive-fg (if fruity-want-dark-modeline subtle-2 "#506070"))
+      (ml-inactive-bg (if fruity-want-dark-modeline bg-alt "#DFE9F2")))
 
   (custom-theme-set-faces
    'fruity
@@ -148,16 +166,16 @@
    `(nobreak-hyphen ((t (:foreground ,fg-dim))))
 
 ;;;; Header / mode line / tab line
-   `(header-line ((t (:foreground ,modeline-fg :background ,modeline-ibg :extend t))))
+   `(header-line ((t (:foreground ,fg :background "#333333" :extend t))))
    `(mode-line
-     ((t (:foreground ,modeline-fg :background ,modeline-bg
-                      :box (:color ,modeline-bg :line-width 5)))))
+     ((t (:foreground ,ml-fg :background ,ml-bg
+                      :box (:color ,ml-bg :line-width 5)))))
    `(mode-line-inactive
-     ((t (:foreground ,modeline-ifg :background ,modeline-ibg
-                      :box (:color ,modeline-ibg :line-width 5)))))
-   `(mode-line-emphasis ((t (:foreground ,modeline-fg :weight bold))))
-   `(mode-line-highlight ((t (:foreground ,modeline-fg :box nil :weight bold))))
-   `(mode-line-buffer-id ((t (:foreground ,modeline-fg :weight bold))))
+     ((t (:foreground ,ml-inactive-fg :background ,ml-inactive-bg
+                      :box (:color ,ml-inactive-bg :line-width 5)))))
+   `(mode-line-emphasis ((t (:foreground ,ml-fg :weight bold))))
+   `(mode-line-highlight ((t (:foreground ,pink :weight bold))))
+   `(mode-line-buffer-id ((t (:foreground ,ml-fg :weight bold))))
    `(tab-bar ((t (:foreground ,fg :background ,bg-visual))))
    `(tab-bar-tab ((t (:foreground ,fg :background ,bg :weight bold))))
    `(tab-bar-tab-inactive ((t (:foreground ,fg-dim :background ,bg-visual))))
@@ -168,10 +186,10 @@
    `(tab-line-highlight ((t (:foreground ,fg :background ,bg-pmenu-sel))))
 
 ;;;; Line numbers
-   `(line-number ((t (:foreground ,fg-dim :background ,bg-linenum))))
-   `(line-number-current-line ((t (:foreground ,fg :background ,bg-linenum :weight bold))))
-   `(line-number-major-tick ((t (:foreground ,fg-dim :background ,bg-linenum :weight bold))))
-   `(line-number-minor-tick ((t (:foreground ,fg-dimmer :background ,bg-linenum))))
+   `(line-number ((t (:foreground ,fg-dim :background ,linenum-bg))))
+   `(line-number-current-line ((t (:foreground ,fg :background ,linenum-bg :weight bold))))
+   `(line-number-major-tick ((t (:foreground ,fg-dim :background ,linenum-bg :weight bold))))
+   `(line-number-minor-tick ((t (:foreground ,fg-dimmer :background ,linenum-bg))))
 
 ;;;; Font lock
    `(font-lock-builtin-face ((t (:foreground ,operator))))
@@ -951,7 +969,7 @@
    `(eglot-highlight-symbol-face ((t (:background ,bg-visual))))
    `(eglot-diagnostic-tag-unnecessary-face ((t (:inherit shadow))))
    `(eglot-diagnostic-tag-deprecated-face ((t (:strike-through t))))
-   `(eglot-mode-line ((t (:foreground ,modeline-fg :weight bold))))
+   `(eglot-mode-line ((t (:foreground ,fg :weight bold))))
 
 ;;;; Tree-sitter
    `(tree-sitter-hl-face:attribute ((t (:inherit font-lock-preprocessor-face))))
@@ -1113,7 +1131,7 @@
    `(restclient-status-code-face ((t (:foreground ,identifier :weight bold))))
 
 ;;;; Anzu
-   `(anzu-mode-line ((t (:foreground ,modeline-fg :weight bold))))
+   `(anzu-mode-line ((t (:foreground ,fg :weight bold))))
    `(anzu-mode-line-no-match ((t (:foreground ,error-fg :weight bold))))
    `(anzu-match-1 ((t (:foreground ,search-fg :background ,search-bg))))
    `(anzu-match-2 ((t (:foreground ,isearch-fg :background ,isearch-bg))))
@@ -1149,9 +1167,9 @@
    `(speedbar-tag-face ((t (:foreground ,magenta))))))
 
 ;;;###autoload
-(when load-file-name
+(when (and (boundp 'custom-theme-load-path) load-file-name)
   (add-to-list 'custom-theme-load-path
                (file-name-as-directory (file-name-directory load-file-name))))
 
-(provide 'fruity-theme)
+(provide-theme 'fruity)
 ;;; fruity-theme.el ends here
